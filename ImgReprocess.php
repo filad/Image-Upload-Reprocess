@@ -42,6 +42,9 @@ class ImgReprocess
 	public function reprocess()
 	{
 		$mime = $this->checkMime();	
+		if ($mime == null) { 
+			return false;
+		}
 		return $this->_adapter->reprocess($mime);
 	}
 	
@@ -89,7 +92,7 @@ abstract class Adapter_Abstract
  */
 class Adapter_GD extends Adapter_Abstract
 {
-	public function reprocess($mime)
+	public function reprocess($mime = null)
 	{
 		switch ($mime):
 			case 'image/jpeg':
@@ -134,7 +137,7 @@ class Adapter_GD extends Adapter_Abstract
 			return false;
 		} else {
 			$filepath = $this->_newdir.$this->_newname.'.png'; 
-			imagepng($image, $this->_newdir, 80);
+			imagepng($image, $filepath, 80);
 		}
 		
 		//free up memory
@@ -150,7 +153,7 @@ class Adapter_GD extends Adapter_Abstract
 			return false;
 		} else {
 			$filepath = $this->_newdir.$this->_newname.'.gif'; 
-			imagegif($image, $this->_newdir, 80);
+			imagegif($image, $filepath, 80);
 		}
 		
 		//free up memory
@@ -163,8 +166,13 @@ class Adapter_GD extends Adapter_Abstract
  * Imagick Adapter
  */
 class Adapter_Imagick extends Adapter_Abstract
-{	
-	public function reprocess()
+{
+	/**
+	 * @param string Mime type - optional here
+	 * @return bool false on fail
+	 * @throws Exception
+	 */	
+	public function reprocess($mime = null)
 	{
 		try 
 		{
@@ -172,13 +180,13 @@ class Adapter_Imagick extends Adapter_Abstract
 	        $img->stripImage();
 			
 			$pathname = $this->_newdir.$this->_newname;
-	        $img->writeImage($newdir.$newname);
+	        $img->writeImage($pathname);
 	        $img->clear();
 	        $img->destroy();
 			return true;
-					
 		} catch (Exception $e){
-			echo 'Imagick exception caught: ',  $e->getMessage(), "\n";
+			error_log('Imagick exception caught: '.$e->getMessage());
+			return false;
 		}
 	}
 }
