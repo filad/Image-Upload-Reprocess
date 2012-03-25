@@ -34,6 +34,7 @@ Then you call `setAdapter()` and eventually `reprocess()`:
 	$repr->setAdapter('GD')
           ->reprocess();
 
-Or we can set the 'Imagick' adapter as well, (but you have to install Image Magick and the php Imagick extension for this):  
+Or we can set the 'Imagick' adapter as well, (but you have to install Image Magick and the php Imagick extension for this):
+
 	$repr->setAdapter('Imagick')
 	     ->reprocess();
