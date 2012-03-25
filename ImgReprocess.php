@@ -7,7 +7,7 @@
  * It has two adapter (as of now) 'GD' and 'Imagick'.
  * See detailed usage in README.
  * @copyright Adam Filkor
- * @version 2012.03
+ * @version 2012.03.0
  */
 class ImgReprocess
 {
