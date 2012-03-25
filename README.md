@@ -14,7 +14,7 @@ If it's a real image and contains unsafe header information, reprocess() will co
 Usage
 -----
 
-Create a new ImgReprocess object:
+Firstly, create a new ImgReprocess object:
 	
 
 	require_once('ImgReprocess.php');
@@ -32,7 +32,7 @@ Here you can see we not added any extension, the class will fill the proper exte
 Then you call `setAdapter()` and eventually `reprocess()`:
 
 	$repr->setAdapter('GD')
-          ->reprocess();
+		->reprocess();
 
 Or we can set the 'Imagick' adapter as well, (but you have to install Image Magick and the php Imagick extension for this):
 
