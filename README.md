@@ -16,7 +16,7 @@ Usage
 
 Create a new ImgReprocess object:
 	
-    <?php
+    ```php
     require_once('ImgReprocess.php');
     
     //constructor parameters
@@ -25,6 +25,7 @@ Create a new ImgReprocess object:
     $newname = 'newfile';
 
     $repr = new ImgReprocess($file, $newdir, $newname);
+    ```
     
 Here you can see we not added any extension, the class will fill the proper extension for you. You just have to add the name of the file `$newname` as the third argument.
 
