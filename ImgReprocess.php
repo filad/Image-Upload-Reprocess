@@ -73,14 +73,12 @@ abstract class Adapter_Abstract
 {
 	protected $_file;
 	protected $_newdir;
-	protected $_mime;
 	protected $_newname;
 
 	public function __construct($file, $newdir = null, $newname = null)
 	{
 		$this->_file 	= $file;
 		$this->_newdir  = $newdir;
-		$this->_mime 	= $mime;
 		$this->_newname = $newname;
 	}
 	
