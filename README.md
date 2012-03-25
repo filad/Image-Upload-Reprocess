@@ -15,7 +15,8 @@ Usage
 -----
 
 Create a new ImgReprocess object:
-
+	
+    <?php
     require_once('ImgReprocess.php');
     
     //constructor parameters
