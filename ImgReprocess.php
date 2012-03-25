@@ -1,4 +1,13 @@
 <?php
+/**
+ * You can use this class to reprocess the image the user has uploaded.
+ * This will remove exif data as well.
+ * If the image is bogus the reprocess() function should return false.
+ * This will rename the image to the correct extension.
+ * It has two adapter (as of now) 'GD' and 'Imagick'.
+ * @copyright Adam Filkor
+ * @version 2012.03
+ */
 class ImgReprocess
 {
 	protected $_file;
@@ -8,9 +17,9 @@ class ImgReprocess
 
 	/**
 	 * Class constructor. 
-	 * @param $file The image which was uploaded by the user
-	 * @param $newdir Directory path of the fresh reprocessed image ex. '/etc/www/'.  
-	 * @param $newname Name of the new file like 'abc'. The class will set the extension automatically.
+	 * @param string $file The image which was uploaded by the user
+	 * @param string $newdir Directory path of the fresh reprocessed image ex. '/etc/www/'.  
+	 * @param string $newname Name of the new file like 'abc'. The class will set the extension automatically.
 	 */
 	
 	public function __construct($file, $newdir = null, $newname = null)
@@ -22,6 +31,8 @@ class ImgReprocess
 	
 	/**
 	 * Sets adapter, default is 'GD'. So it will use the GD library by default.
+	 * @param string
+	 * @return ImgReprocess object 
 	 */
 	public function setAdapter($adapter)
 	{
@@ -35,14 +46,14 @@ class ImgReprocess
 	}
 	
 	/**
-	 * Reprocess the image - this will remove exif data as well
+	 * Reprocess the image - based on the adapter. This will remove exif data as well
 	 * The new image will be safe after reprocess.
 	 * @return bool This value will be false if something went wrong
 	 */
 	public function reprocess()
 	{
 		$mime = $this->checkMime();	
-		if ($mime == null) { 
+		if ($mime == null) {
 			return false;
 		}
 		return $this->_adapter->reprocess($mime);
@@ -51,7 +62,8 @@ class ImgReprocess
 	/**
 	 * Check MIME-type. We will use the fileinfo extension for this.
 	 * We call the proper reprocess function based on the returned value of this. 
-	 * Remember you cannot trust in MIME-type of uploaded images. 
+	 * ! Remember you cannot trust in MIME-type of uploaded images !
+	 * @return string The  calculated MIMEType like 'image/jpeg'
 	 */
 	public function checkMime()
 	{
@@ -69,6 +81,9 @@ class ImgReprocess
 	}
 }
 
+/**
+ * Abstract class for the adapter
+ */
 abstract class Adapter_Abstract 
 {
 	protected $_file;
@@ -82,6 +97,10 @@ abstract class Adapter_Abstract
 		$this->_newname = $newname;
 	}
 	
+	/**
+	 * @param string The actual MIME Type
+	 * @return bool False on fail
+	 */
 	abstract public function reprocess($mime = null);	
 }
 
@@ -138,7 +157,6 @@ class Adapter_GD extends Adapter_Abstract
 			imagepng($image, $filepath, 8);
 		}
 		
-		//free up memory
 		imagedestroy($image);
 		return true;
 	}
@@ -154,7 +172,6 @@ class Adapter_GD extends Adapter_Abstract
 			imagegif($image, $filepath);
 		}
 		
-		//free up memory
 		imagedestroy($image);
 		return true;	
 	}	
@@ -165,11 +182,6 @@ class Adapter_GD extends Adapter_Abstract
  */
 class Adapter_Imagick extends Adapter_Abstract
 {
-	/**
-	 * @param string Mime type - optional here
-	 * @return bool false on fail
-	 * @throws Exception
-	 */	
 	public function reprocess($mime = null)
 	{
 		try 
