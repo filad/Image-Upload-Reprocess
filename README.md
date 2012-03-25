@@ -20,14 +20,16 @@ Firstly, create a new ImgReprocess object:
 	require_once('ImgReprocess.php');
 
 	//constructor parameters
-	$file = '/var/www/sourcepic.gif';
-	$newdir = '/var/www/destination/';
+	$file    = '/var/www/sourcepic.gif';
+	$newdir  = '/var/www/destination/';
 	$newname = 'newfile';
 
 	$repr = new ImgReprocess($file, $newdir, $newname);
 
-    
-Here you can see we not added any extension, the class will fill the proper extension for you. You just have to add the name of the file `$newname` as the third argument.
+`$file` is your source filename. (It could be your `$_FILES['userfile']['tmp_name']`, too.)
+`$newdir` is the the directory of the reprocessed image.
+And the third argument, you just have to add the name of the new image `$newname`.
+*Important*: Here you can see we not added any extension, the class will fill the proper extension for you. 
 
 Then you call `setAdapter()` and eventually `reprocess()`:
 
