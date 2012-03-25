@@ -16,16 +16,16 @@ Usage
 
 Create a new ImgReprocess object:
 	
-    ```php
-    require_once('ImgReprocess.php');
-    
-    //constructor parameters
-    $file = '/var/www/sourcepic.gif';
-    $newdir = '/var/www/test/';
-    $newname = 'newfile';
+```php
+require_once('ImgReprocess.php');
 
-    $repr = new ImgReprocess($file, $newdir, $newname);
-    ```
+//constructor parameters
+$file = '/var/www/sourcepic.gif';
+$newdir = '/var/www/test/';
+$newname = 'newfile';
+
+$repr = new ImgReprocess($file, $newdir, $newname);
+```
     
 Here you can see we not added any extension, the class will fill the proper extension for you. You just have to add the name of the file `$newname` as the third argument.
 
