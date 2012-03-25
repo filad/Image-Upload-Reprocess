@@ -21,7 +21,7 @@ Create a new ImgReprocess object:
 
 	//constructor parameters
 	$file = '/var/www/sourcepic.gif';
-	$newdir = '/var/www/test/';
+	$newdir = '/var/www/destination/';
 	$newname = 'newfile';
 
 	$repr = new ImgReprocess($file, $newdir, $newname);
