@@ -5,7 +5,7 @@ General
 -------
 You can use the ImgReprocess class to reprocess the image the user has uploaded.
 
-You can find in ImgReprocess.php. You can find there two adapter classes, too. So you can use it with the GD library or the Imagick extension as well.
+You can find it in *ImgReprocess.php*. There you can find two adapter classes. So you can use it with the GD library or the Imagick extension as well.
 
 The class automatically adds the proper extension based on PHP's Fileinfo MIME Type checking. Of course relying only on MIME Type is not safe, thats we using reprocessing: if GD or Imagick notices that the file isn't a real image, then the `reprocess()` function will stop and return false. 
 
@@ -38,3 +38,5 @@ Or we can set the 'Imagick' adapter as well, (but you have to install Image Magi
 
 	$repr->setAdapter('Imagick')
 	     ->reprocess();
+		
+`reprocess()` will return FALSE on failure.
