@@ -5,6 +5,7 @@
  * If the image is bogus the reprocess() function should return false.
  * This will rename the image to the correct extension.
  * It has two adapter (as of now) 'GD' and 'Imagick'.
+ * See detailed usage in README.
  * @copyright Adam Filkor
  * @version 2012.03
  */
