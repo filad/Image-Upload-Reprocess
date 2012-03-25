@@ -177,8 +177,8 @@ class Adapter_Imagick extends Adapter_Abstract
 	        $img = new Imagick($file);
 	        $img->stripImage();
 			
-			$pathname = $this->_newdir.$this->_newname;
-	        $img->writeImage($pathname);
+			$newname = $this->_createNewFilename($mime);
+	        $img->writeImage($newname);
 	        $img->clear();
 	        $img->destroy();
 			return true;
@@ -186,6 +186,30 @@ class Adapter_Imagick extends Adapter_Abstract
 			error_log('Imagick exception caught: '.$e->getMessage());
 			return false;
 		}
+	}
+	
+	/**
+	 * Creates new filename based on the ImgReprocess::checkMime() function
+	 */
+	protected function _createNewFilename($mime)
+	{
+		switch ($mime):
+			case 'image/jpeg':
+				return $this->_newdir.$this->_newname.'.jpg';
+				break;
+				
+			case 'image/png':
+				return $this->_newdir.$this->_newname.'.png';
+				break;
+				
+			case 'image/gif':
+				return $this->_newdir.$this->_newname.'.gif';
+				break;
+				
+			default:
+				//handle error
+				return false;		
+		endswitch;
 	}
 }
 ?>
