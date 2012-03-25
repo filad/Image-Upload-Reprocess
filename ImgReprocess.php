@@ -137,7 +137,7 @@ class Adapter_GD extends Adapter_Abstract
 			return false;
 		} else {
 			$filepath = $this->_newdir.$this->_newname.'.png'; 
-			imagepng($image, $filepath, 80);
+			imagepng($image, $filepath, 8);
 		}
 		
 		//free up memory
@@ -153,7 +153,7 @@ class Adapter_GD extends Adapter_Abstract
 			return false;
 		} else {
 			$filepath = $this->_newdir.$this->_newname.'.gif'; 
-			imagegif($image, $filepath, 80);
+			imagegif($image, $filepath);
 		}
 		
 		//free up memory
