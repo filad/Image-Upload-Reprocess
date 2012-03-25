@@ -174,7 +174,7 @@ class Adapter_Imagick extends Adapter_Abstract
 	{
 		try 
 		{
-	        $img = new Imagick($file);
+	        $img = new Imagick($this->_file);
 	        $img->stripImage();
 			
 			$newname = $this->_createNewFilename($mime);
